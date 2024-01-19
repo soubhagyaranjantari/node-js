@@ -11,7 +11,7 @@ const myServer = http.createServer((req, res) => {
     var seconds = currentDate.getSeconds();
     const url = require("url")
     const myUrl = url.parse(req.url, true)
-    const log = `${hours} ${minutes} ${seconds} ${req.url} New Request Recived\n`;
+    const log = `${hours} ${minutes} ${seconds} ${req.url} ${req.method} New Request Recived\n`;
     fs.appendFile('serverlog.txt', log, (err, data) => {
 
         // console.log(myUrl);
@@ -21,7 +21,7 @@ const myServer = http.createServer((req, res) => {
         switch (myUrl.pathname) {
             case '/':
                 fs.readFile('./serverlog.txt', 'utf-8', (err, data) => {
-                    console.log(data);
+                    // console.log(data);
                     res.end(`<pre>${data}</pre>\n`)
                 })
 
